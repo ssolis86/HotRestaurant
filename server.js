@@ -35,7 +35,7 @@ const express = require('express');
     ]
     
     app.get('/', (req, res) => res.sendFile(path.join(__dirname, "index.html")));
-    app.get('/view', (req, res) => res.sendFile(path.join(__dirname, "view.html")));
-    app.get('/make', (req, res) => res.sendFile(path.join(__dirname, "make.html")));
+    app.get('/reservations', (req, res) => res.sendFile(path.join(__dirname, "reservations.html")));
+    app.get('/tables', (req, res) => res.sendFile(path.join(__dirname, "tables.html")));
 
     app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`))
