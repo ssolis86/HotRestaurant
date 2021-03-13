@@ -33,6 +33,15 @@ const express = require('express');
             uniqueId: 4,
         }
     ]
+
+for (let i = 0; i < tables.length; i++) {
+    if (tables === tables[i].uniqueId) {
+      return res.json(tables[i]);
+    }
+  }
+
+  return res.json(true);
+   
     
     app.get('/', (req, res) => res.sendFile(path.join(__dirname, "index.html")));
     app.get('/reservations', (req, res) => res.sendFile(path.join(__dirname, "reservations.html")));
