@@ -1,0 +1,33 @@
+{
+  "name": "hotrestaurant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "aws-sign2": "^0.7.0",
+    "aws4": "^1.11.0",
+    "babel-preset-current-node-syntax": "^1.0.1",
+    "balanced-match": "^1.0.0",
+    "browser-process-hrtime": "^1.0.0",
+    "buffer-from": "^1.1.1",
+    "callsites": "^3.1.0",
+    "camelcase": "^5.3.1",
+    "express": "^4.17.1",
+    "inquirer": "^8.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssolis86/HotRestaurant.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ssolis86/HotRestaurant/issues"
+  },
+  "homepage": "https://github.com/ssolis86/HotRestaurant#readme"
+}
