@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">
+                <span class="fa fa-fire"></span>
+                "Hot Restaurant"
+                </h1>
+                <hr>
+                <h2 class="text-center">Current Resverations and Waiting List</h2>
+                <br>
+                <div class="text-center">
+                    <a href="/resverations">
+                    <button class="btn btn-lg btn danger"><span class="fa fa-credit-card"></span>
+                    "Make Reservation</button>
+                </a>
+                <a href="/">
+                    <button class="btn btn-lg btn-danger"><span class="fa fa-home"></span></button>
+                </a>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-reader">
+                                <h4>Current Reservations</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul id="tableList" class="list-group">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h4>Waiting List</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul id="waitList" class="list-group"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <footer class="footer mt-4">
+            <div class="container">
+                <p>Control Panel</p>
+                <p>
+                    <a href="#" id="clear">Clear Table</a>
+                    " | "
+                    <a href="/tables">API Tables Link</a>
+                    " | "
+                    <a href="/waitList">API Wait List</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script type="text/javascript">
+    function runTableQuery() {
+        $.ajax({ url: "/tables", method: "GET"})
+        .then(function(tableData){
+            console.log(tableData);
+            console.log("_________________________");
+
+            for (var i=0; i < tableData.length; i++) {
+                var tableList = $("#tableList");
+
+                var listItem = $("<li class='list-group-item mt-4'>");
+                
+                listItem.append(
+                    $("<h2").text("Table #" + (i + 1)),
+                    $("<hr>"),
+                    $("<h2>").text("ID: " + tableData[i].customerID),
+                    $("<h2>").text("Name: " + tableData[i].customerName),
+                    $("<h2>").text("Email: " + tableData[i].customerEmail),
+                    $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+                );
+                tableList.append(listItem);
+            }
+        });
+    }
+    
+    function runWaitListQuery() {
+        $.ajax({ url: "/waitlist", method: "GET"})
+        .then(function(waitData){
+            console.log(waitData);
+            console.log("___________________");
+
+            for(var i = 0; i < waitData.length; i++) {
+                var waitList = $("waitList");
+                var listItem = $("<li class='list-group-item mt-4'>");
+                
+            listItem.append(
+                $("<h2").text("Table #" + (i + 1)),
+                $("<hr>"),
+                $("<h2>").text("ID: " + waitData[i].customerID),
+                $("<h2>").text("Name: " + waitData[i].customerName),
+                $("<h2>").text("Email: " + waitData[i].customerEmail),
+                $("<h2>").text("Phone: " + waitData[i].phoneNumber)
+            );
+            waitList.append(listItem);
+            }
+        });
+    }
+
+    function clearTable() {
+        alert("Clearing Table");
+        
+        $.ajax({ url: "/api/clear", method: "POST"}).then(function(){
+            $("#waitList").empty();
+            $("#tableList").empty();
+        });
+    }
+    $("#clear").on("click", clearTable);
+
+    runTableQuery();
+    runWaitListQuery();
+    </script>
+</body>
+</html>
