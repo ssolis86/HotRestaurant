@@ -28,7 +28,7 @@
             <span class="fa fa-list-alt"></span> View Tables</button>
         </a>
         <a href="/">
-          <button class="btn btn-lg btn-default">
+          <button class="btn btn-lg btn-default" id="addBtn">
             <span class="fa fa-home"></span>
           </button>
         </a>
@@ -74,11 +74,39 @@
           <a href="/api/waitlist">API Wait List</a>
       </div>
     </footer>
-
   </div>
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    addBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+      
+        let resName = document.getElementById('reserve-name').value.trim();
+        let resPhone = document.getElementById('reserve-phone').value.trim();
+        let resEmail = document.getElementById('reserve-email').value.trim();
+        let resUniqueId = document.getElementById('reserve-unique-id').value.trim();
 
-</body>
+        let newRes = { 
+          name: resName,
+          number: resPhone,
+          email: resEmail,
+          uniqueId: parseInt(resUniqueId),
+        };
 
-</html>
+        fetch('/make.html', {
+          method: 'POST',
+          headers: {
+            'Content-Type' : 'application/json',
+          },
+          body: JSON.stringify(newRes),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('make.html', data);
+          alert(`Adding Reservation: ${data.name}`);
+        })
+        .catch((error) => {
+          console.log("Error: ", error)
+        })
 
+    });
 
